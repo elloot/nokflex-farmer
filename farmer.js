@@ -2,18 +2,17 @@ const { chromium } = require('playwright');
 require('dotenv').config();
 
 (async () => {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ headless: false });
   const page = await browser.newPage();
   await page.goto('https://nokflex.nok.se');
-  await page.fill('#login-input', 'elliot.duchek@gmail.com');
-  // await page.click('#next-button');
-  await page.keyboard.press('Enter');
+  await page.fill('#login-input', process.env.EMAIL);
+  await page.click('#next-button');
+  // await page.keyboard.press('Enter');
   await page.fill('#password-input', process.env.PASS);
-  await page.keyboard.press('Enter');
-  await page.keyboard.press('Enter');
-  //await page.click('#next-button');
-  //await page.click('#next-button');
-  console.log(page.url());
+  // await page.keyboard.press('Enter');
+  // await page.keyboard.press('Enter');
+  await page.click('#next-button');
+  await page.click('#next-button');
   await page.click('.user-button-container :nth-child(2)');
   await page.click('button.v-btn.theme--light.primary');
   await page.click('a:not([Logo])');
