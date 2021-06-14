@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 require('dotenv').config();
 
 (async () => {
-  const browser = await chromium.launch({ headless: false, slowMo: 100 });
+  const browser = await chromium.launch({ headless: false });
   const page = await browser.newPage();
   await page.goto('https://nokflex.nok.se');
   await page.fill('#login-input', process.env.EMAIL);
@@ -17,7 +17,7 @@ require('dotenv').config();
   await page.click('a:not([Logo])');
   await page.goto('https://nokflex.nok.se');
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 1000; i++) {
     await page.fill('#login-input', process.env.EMAIL);
     await page.click('#next-button');
     await page.fill('#password-input', process.env.PASS);
